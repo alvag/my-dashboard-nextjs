@@ -6,12 +6,10 @@ const getPokemons = async ( limit = 20, offset = 0 ): Promise<Pokemon[]> => {
     const res = await fetch( url );
     const data: PokemonsResponse = await res.json();
 
-    const pokemons: Pokemon[] = data.results.map( ( pokemon, index ) => ( {
+    return data.results.map( ( pokemon, index ) => ( {
         id: pokemon.url.split( '/' ).at( -2 )!,
         name: pokemon.name,
-    } ) )
-
-    return pokemons;
+    } ) );
 }
 
 interface PokemonsProps {
