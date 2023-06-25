@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Pokemon } from '@/app/pokemons';
+import { SimplePokemon } from '@/pokemons';
 import { IoHeartOutline } from 'react-icons/io5';
 
 interface Props {
-    pokemon: Pokemon;
+    pokemon: SimplePokemon;
 }
 
 export const PokemonCard = ( { pokemon }: Props ) => {

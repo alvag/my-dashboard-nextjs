@@ -1,7 +1,7 @@
-import { Pokemon, PokemonCard } from '@/app/pokemons';
+import { SimplePokemon, PokemonCard } from '@/pokemons';
 
 interface Props {
-    pokemons: Pokemon[];
+    pokemons: SimplePokemon[];
 }
 
 export const PokemonGrid = ( { pokemons }: Props ) => {

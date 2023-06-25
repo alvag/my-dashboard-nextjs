@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Pokemon, PokemonGrid, PokemonsResponse } from '@/app/pokemons';
+import { SimplePokemon, PokemonGrid, PokemonsResponse } from '@/pokemons';
 
-const getPokemons = async ( limit = 20, offset = 0 ): Promise<Pokemon[]> => {
+const getPokemons = async ( limit = 20, offset = 0 ): Promise<SimplePokemon[]> => {
     const url = `https://pokeapi.co/api/v2/pokemon?limit=${ limit }&offset=${ offset }`;
     const res = await fetch( url );
     const data: PokemonsResponse = await res.json();
