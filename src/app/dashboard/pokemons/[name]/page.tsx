@@ -1,23 +1,31 @@
 import { FC } from 'react';
 import { Metadata } from 'next';
 import Image from 'next/image';
-import { Pokemon } from '@/pokemons';
+import { Pokemon, PokemonsResponse } from '@/pokemons';
 import { notFound } from 'next/navigation';
 
 
 interface PokemonProps {
     params: {
-        id: string;
+        name: string;
     }
 }
 
 export async function generateStaticParams() {
-    return Array.from( { length: 151 } ).map( ( _, index ) => ( { id: `${ index + 1 }` } ) )
+
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=151`;
+    const res = await fetch( url );
+    const data: PokemonsResponse = await res.json();
+
+    return data.results.map( ( pokemon, index ) => ( {
+        name: pokemon.name
+    } ) );
+
 }
 
 export async function generateMetadata( { params }: PokemonProps ): Promise<Metadata> {
     try {
-        const { id, name } = await getPokemon( params.id );
+        const { id, name } = await getPokemon( params.name );
 
         return {
             title: `#${ id } - ${ name }`,
@@ -32,9 +40,9 @@ export async function generateMetadata( { params }: PokemonProps ): Promise<Meta
     }
 }
 
-const getPokemon = async ( id: string ): Promise<Pokemon> => {
+const getPokemon = async ( name: string ): Promise<Pokemon> => {
     try {
-        return await fetch( `https://pokeapi.co/api/v2/pokemon/${ id }`,
+        return await fetch( `https://pokeapi.co/api/v2/pokemon/${ name }`,
             {
                 // cache: 'force-cache'
                 next: {
@@ -50,7 +58,7 @@ const getPokemon = async ( id: string ): Promise<Pokemon> => {
 
 const PokemonPage: FC<PokemonProps> = async ( { params } ) => {
 
-    const pokemon = await getPokemon( params.id );
+    const pokemon = await getPokemon( params.name );
 
     return (
         <div className="flex mt-5 flex-col items-center text-slate-800">
