@@ -8,13 +8,27 @@ interface Props {
     value?: number;
 }
 
+export interface CounterResponse {
+    count: number;
+}
+
+const getApiCounter = async (): Promise<CounterResponse> => {
+    return await fetch( '/api/counter' ).then( res => res.json() )
+}
+
 export const CartCounter = ( { value = 0 }: Props ) => {
     const count = useAppSelector( state => state.counter.count );
     const dispatch = useAppDispatch();
 
-    useEffect( () => {
+    /*useEffect( () => {
         dispatch( initCounterState( value ) );
-    }, [ dispatch, value ] );
+    }, [ dispatch, value ] );*/
+
+    useEffect( () => {
+        getApiCounter().then( res => {
+            dispatch( initCounterState( res.count ) );
+        } )
+    }, [ dispatch ] );
 
     return (
         <>
