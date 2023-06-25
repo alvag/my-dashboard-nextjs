@@ -23,3 +23,4 @@ const FavoritesPage: FC<FavoritesProps> = async ( {} ) => {
 };
 
 export default FavoritesPage;
+
