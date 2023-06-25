@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { SimpleWidget } from '@/app/components';
+import { WidgetsGrid } from '@/app/components';
 
 interface MainProps {
 }
@@ -15,9 +15,7 @@ const MainPage: FC<MainProps> = ( {} ) => {
             <h1 className="mt-2 text-3xl">Dashboard</h1>
             <span className="text-xl">Informacion general</span>
 
-            <div className="flex flex-wrap p-2">
-                <SimpleWidget/>
-            </div>
+            <WidgetsGrid/>
         </div>
     );
 };
