@@ -27,8 +27,7 @@ const pokemonsSlice = createSlice( {
                 state[ pokemon.id ] = pokemon;
             }
 
-            localStorage.setItem( "favoritePokemons", JSON.stringify( state ) );
-
+            // localStorage.setItem( "favoritePokemons", JSON.stringify( state ) );
         }
     }
 } );
